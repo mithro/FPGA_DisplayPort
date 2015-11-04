@@ -8,6 +8,13 @@ Implements a 800x600 display over a one, two or four 2.70Gb/s lanes (depending o
 
 Low-level transceiver blocks are supplied for Artix-7 and Spartan-6 LXT FPGAs. These will need to be revised to work wiht your particular FPGA board's layout.
 
+Further Links
+=============
+
+ * [Mailing list](https://groups.google.com/forum/#!forum/foss-displayport) for discussion and help.
+ * [Wiki Page with further information](http://hamsterworks.co.nz/mediawiki/index.php/DisplayPort).
+ * [Sample code for Numato Opsis](https://github.com/timvideos/HDMI2USB-numato-opsis-sample-code/tree/master/video/displayport/output).
+
 TODO
 ====
 - Support 1.62Gb/s link speeds
@@ -28,9 +35,10 @@ TODO
 - All active channels transmit K symbols in the same cycle (excluding 2 cycle skew at end of pipeline) so could share a common K signal, reducing 72 bits down to 65 for most of the pipeline.
 
 Usage prior to optimisations (as a note for later comparison)
-+------------------------------------------------+--------------------------------------------+------------+------------+---------+------+-----+--------+--------+--------------+
+
+
 |                    Instance                    |                   Module                   | Total LUTs | Logic LUTs | LUTRAMs | SRLs | FFs | RAMB36 | RAMB18 | DSP48 Blocks |
-+------------------------------------------------+--------------------------------------------+------------+------------+---------+------+-----+--------+--------+--------------+
+| ---------------------------------------------- | ------------------------------------------ | ---------- | ---------- | ------- | ---- | --- | ------ | ------ | ------------ |
 | top_level                                      |                                      (top) |        711 |        639 |      16 |   56 | 697 |      0 |      1 |            0 |
 |   (top_level)                                  |                                      (top) |         32 |          0 |       0 |   32 |   0 |      0 |      0 |            0 |
 |   Inst_main_stream_processing                  |                     main_stream_processing |        230 |        206 |       0 |   24 | 294 |      0 |      0 |            0 |
@@ -56,5 +64,5 @@ Usage prior to optimisations (as a note for later comparison)
 |     (i_tx0)                                    |                                Transceiver |          0 |          0 |       0 |    0 |   0 |      0 |      0 |            0 |
 |     g_tx[0].i_gtx_tx_reset_controller          |                    gtx_tx_reset_controller |         23 |         23 |       0 |    0 |  35 |      0 |      0 |            0 |
 |     g_tx[1].i_gtx_tx_reset_controller          |                  gtx_tx_reset_controller_0 |          0 |          0 |       0 |    0 |   1 |      0 |      0 |            0 |
-+------------------------------------------------+--------------------------------------------+------------+------------+---------+------+-----+--------+--------+--------------+
+
 * Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
